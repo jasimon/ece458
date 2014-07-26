@@ -28,6 +28,22 @@ $(document).ready(function() {
       }
     };
     xhr.send();
+    $.ajax({
+      url: 'http://localhost:8080',
+      dataType: 'jsonp',
+      contentType: "application/json; charset=utf-8",
+      crossDomain: true,
+      data:  'test',
+      success: function(a, b, c) {
+        console.log(a);
+      },
+      error: function(a,b,c) {
+        console.log('error: ' + a);
+      },
+      jsonpCallback: function(a,b,c) {
+        console.log('jsonp: ', a);
+      }
+    })
   })
 
   $('h1').css('color', 'red');
