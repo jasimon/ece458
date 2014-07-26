@@ -6,7 +6,14 @@ var app = express();
 app.use(logfmt.requestLogger());
 
 app.get('/', function(req, res) {
-  console.log(req.connection.remoteAddress);
+  var ipAdd = req.headers['x-forwarded-for'];
+  if(ipAdd) {
+    var ipAdds = ipAdd.split(',');
+    ipAdd = ipAdds[ipAdds.length - 1];
+} else {
+    ipAdd = req.connection.remoteAddress;
+}
+  console.log(ipAdd);
   res.send('Hello World!');
 });
 
