@@ -6,7 +6,7 @@ var app = express();
 app.use(logfmt.requestLogger());
 
 app.get('/', function(req, res) {
-  console.log(req);
+  console.log(req.connection.remoteAddress);
   res.send('Hello World!');
 });
 
