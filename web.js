@@ -4,6 +4,8 @@ var logfmt = require("logfmt");
 var url = require("url");
 var bodyParser = require("body-parser");
 var sio = require("socket.io");
+var cookieParser = require('cookie-parser')
+var session = require('express-session');
 //var redis = require("redis");
 
 //var client = redis.createClient();
@@ -14,8 +16,8 @@ var app = express();
 
 app.use(logfmt.requestLogger());
 app.use(bodyParser.json({strict: false}));
-app.use(express.cookieParser());
-app.use(express.session({secret: 'somerandomstringhere'}));
+app.use(cookieParser());
+app.use(ession({secret: 'somerandomstringhere'}));
 
 app.get('/', function(req, res) {
     var geturl = url.parse(req.url);
