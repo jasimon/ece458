@@ -36,7 +36,7 @@ $(document).ready(function() {
     // };
     // xhr.send();
   });
-  $('pwd-request').on('click'{
+  $('pwd-request').on('click', function(){
     socket.emit('request password');
   });
 
