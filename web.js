@@ -2,6 +2,7 @@
 var express = require("express");
 var logfmt = require("logfmt");
 var url = require("url");
+var bodyParser = require("body-parser");
 //var sio = require("socket.io");
 //var redis = require("redis");
 
@@ -12,7 +13,7 @@ var app = express();
 //:io.set("store", new sio.RedisStore);
 
 app.use(logfmt.requestLogger());
-app.use(express.bodyParser());
+app.use(bodyParser.json();
 
 app.get('/', function(req, res) {
     var geturl = url.parse(req.url);
