@@ -17,7 +17,7 @@ var app = express();
 app.use(logfmt.requestLogger());
 app.use(bodyParser.json({strict: false}));
 app.use(cookieParser());
-app.use(ession({secret: 'somerandomstringhere'}));
+app.use(session({secret: 'somerandomstringhere'}));
 
 app.get('/', function(req, res) {
     var geturl = url.parse(req.url);
