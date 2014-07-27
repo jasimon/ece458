@@ -29,11 +29,11 @@ app.get('/', function(req, res) {
         });
     } else {
         console.log('desktop detected');
-        var my_g
+        var my_g;
         while(!my_g) {
             client.get("g", function(err, g) {
                 my_g = g;
-            })
+            });
         }
     }
     res.send('Hello World!');
