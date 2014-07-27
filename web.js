@@ -92,11 +92,6 @@ app.post('/', function(req, res) {
     res.send('Hello World!');
 });
 
-app.all('/', function(req, res) {
-    console.log('got something');
-    next();
-});
-
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
     console.log("Listening on " + port);
