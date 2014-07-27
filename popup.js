@@ -17,18 +17,17 @@
    * @public
    */
    console.log('kmasdf');
-   //var socket = io();
-
+   
 $(document).ready(function() {
   $('.bt-discovery').on('click', function() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://obscure-scrubland-1696.herokuapp.com/", true);
-    xhr.onreadystatechange = function() {
-      if(xhr.readyState == 4) {
-        console.log(xhr.responseText);
-      }
-    };
-    xhr.send();
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("GET", "http://obscure-scrubland-1696.herokuapp.com/", true);
+    // xhr.onreadystatechange = function() {
+    //   if(xhr.readyState == 4) {
+    //     console.log(xhr.responseText);
+    //   }
+    // };
+    // xhr.send();
   })
 
   $('h1').css('color', 'red');

@@ -17,33 +17,21 @@
    * @public
    */
    console.log('kmasdf');
-
+   var socket = io();
 $(document).ready(function() {
+  socket.on('sup', function() {
+    console.log('sup');
+  });
   $('.bt-discovery').on('click', function() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://obscure-scrubland-1696.herokuapp.com/", true);
-    xhr.onreadystatechange = function() {
-      if(xhr.readyState == 4) {
-        console.log(xhr.responseText);
-      }
-    };
-    xhr.send();
-    $.ajax({
-      url: 'http://localhost:8080',
-      dataType: 'jsonp',
-      contentType: "application/json; charset=utf-8",
-      crossDomain: true,
-      data:  'test',
-      success: function(a, b, c) {
-        console.log(a);
-      },
-      error: function(a,b,c) {
-        console.log('error: ' + a);
-      },
-      jsonpCallback: function(a,b,c) {
-        console.log('jsonp: ', a);
-      }
-    })
+    socket.emit('register browser');
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("GET", "http://obscure-scrubland-1696.herokuapp.com/", true);
+    // xhr.onreadystatechange = function() {
+    //   if(xhr.readyState == 4) {
+    //     console.log(xhr.responseText);
+    //   }
+    // };
+    // xhr.send();
   })
 
   $('h1').css('color', 'red');

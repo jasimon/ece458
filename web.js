@@ -1,5 +1,6 @@
 // web.js
-var app = require("express")();
+var express = require("express");
+var app = express();
 var http = require('http');
 var server = http.createServer(app);
 var io = require("socket.io").listen(server);
@@ -8,7 +9,10 @@ var url = require("url");
 var bodyParser = require("body-parser");
 var cookieParser = require('cookie-parser')
 var session = require('express-session');
+var path = require('path');
 //var redis = require("redis");
+
+var client = {};
 
 //var client = redis.createClient();
 
@@ -23,49 +27,55 @@ app.use(logfmt.requestLogger());
 app.use(bodyParser.json({strict: false}));
 app.use(cookieParser());
 app.use(session({secret: 'somerandomstringhere'}));
+app.use("/Ext", express.static(__dirname + '/Ext'));
 
 io.on('connection', function(socket) {
     console.log('a user connected');
+    socket.on('register browser', function() {
+        client.browser = socket.id;
+        console.log('registered broswer with id: ' + client.browser);
+        console.log(io.sockets);//.socket(client.browser).emit('sup');
+    });
 });
 
 app.get('/index.html', function(req, res) {
     res.sendfile('Ext/index.html');
 })
 
-app.get('/', function(req, res) {
-    var geturl = url.parse(req.url);
-    console.log(geturl);
-    var ipAdd = req.headers['x-forwarded-for'];
-    if(ipAdd) {
-        var ipAdds = ipAdd.split(',');
-        ipAdd = ipAdds[ipAdds.length - 1];
-    } else {
-        ipAdd = req.connection.remoteAddress;
-    }
-    console.log(ipAdd);
-    var ua = req.headers['user-agent'];
-    if(/mobile/i.test(ua)) {
-        console.log('mobile detected');
-        //req.on('data', function (data) {
-        //    console.log(data.toString());
-        //});
-    } else {
-        console.log('desktop detected');
-        var my_g; 
-        //while(!my_g) {
-        //    client.get("g", function(err, g) {
-        //        my_g = g;
-        //    });
-        //}
-    }
-    res.write('Hello World!');
-    req.session.broswerRes = res;
+// app.get('/', function(req, res) {
+//     var geturl = url.parse(req.url);
+//     console.log(geturl);
+//     var ipAdd = req.headers['x-forwarded-for'];
+//     if(ipAdd) {
+//         var ipAdds = ipAdd.split(',');
+//         ipAdd = ipAdds[ipAdds.length - 1];
+//     } else {
+//         ipAdd = req.connection.remoteAddress;
+//     }
+//     console.log(ipAdd);
+//     var ua = req.headers['user-agent'];
+//     if(/mobile/i.test(ua)) {
+//         console.log('mobile detected');
+//         //req.on('data', function (data) {
+//         //    console.log(data.toString());
+//         //});
+//     } else {
+//         console.log('desktop detected');
+//         var my_g; 
+//         //while(!my_g) {
+//         //    client.get("g", function(err, g) {
+//         //        my_g = g;
+//         //    });
+//         //}
+//     }
+//     res.write('Hello World!');
+//     req.session.broswerRes = res;
 
-    //var b = 5;
-    //var gb = Math.pow(parseInt(req.session.g),b);
-    //req.session.gb('gb', gb);
-    //console.log('gb: ' + gb);
-});
+//     //var b = 5;
+//     //var gb = Math.pow(parseInt(req.session.g),b);
+//     //req.session.gb('gb', gb);
+//     //console.log('gb: ' + gb);
+// });
 
 app.post('/', function(req, res) {
     req.on('data', function (data) {
