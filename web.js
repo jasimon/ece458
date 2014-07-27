@@ -10,7 +10,7 @@ var session = require('express-session');
 
 //var client = redis.createClient();
 var app = express();
-//var io = sio.listen(app);
+var io = sio.listen(app);
 
 //:io.set("store", new sio.RedisStore);
 
@@ -18,6 +18,10 @@ app.use(logfmt.requestLogger());
 app.use(bodyParser.json({strict: false}));
 app.use(cookieParser());
 app.use(session({secret: 'somerandomstringhere'}));
+
+io.on('connection'), function(socket) {
+    console.log('a user connected');
+}
 
 app.get('/', function(req, res) {
     var geturl = url.parse(req.url);

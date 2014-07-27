@@ -17,6 +17,7 @@
    * @public
    */
    console.log('kmasdf');
+   var socket = io();
 
 $(document).ready(function() {
   $('.bt-discovery').on('click', function() {
