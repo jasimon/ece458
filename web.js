@@ -1,6 +1,8 @@
 // web.js
 var app = require("express")();
-var io = require("socket.io")(app);
+var http = require('http');
+var server = http.createServer(app);
+var io = require("socket.io").listen(server);
 var logfmt = require("logfmt");
 var url = require("url");
 var bodyParser = require("body-parser");
@@ -11,7 +13,7 @@ var session = require('express-session');
 //var client = redis.createClient();
 
 var port = Number(process.env.PORT || 5000);
-app.listen(port, function() {
+server.listen(port, function() {
     console.log("Listening on " + port);
 });
 
