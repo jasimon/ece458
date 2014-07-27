@@ -14,6 +14,8 @@ var app = express();
 app.use(logfmt.requestLogger());
 
 app.get('/', function(req, res) {
+    var geturl = url.parse(req.url);
+    console.log(geturl);
     var ipAdd = req.headers['x-forwarded-for'];
     if(ipAdd) {
         var ipAdds = ipAdd.split(',');
