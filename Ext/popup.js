@@ -58,17 +58,19 @@ $(document).ready(function() {
   });
   $('h1').css('color', 'red');
   function handshake(callback) {
+    var secret = {};
+    secret.a = 3;
     var ret =  {};
     ret.g = 5;
-    ret.ga = 125;
-    socket.emit('handshake', ret, function(x) {
+    ret.ga = Math.pow(ret.g, secret.a);
+    socket.emit('handshake', ret, function(x,y) {
       return function(data) {
         console.log('calling back handshake browser');
-        x(data);
+        x(data, y);
       };
-    }(callback));
+    }(callback, secret));
   }
-  function savePass(data) {
+  function savePass(data, secret) {
         console.log('handshook');
         console.log(data);
         var info = {};
@@ -83,7 +85,12 @@ $(document).ready(function() {
       info.pwd = cipher.output.getBytes();
       info.id = $('.save-name').val();
       console.log(info.pwd)
-      socket.emit('save password', info, function() {
+      var infostring = JSON.stringify(info);
+      var cipher2 = forge.cipher.createCipher('AES-CBC', Math.pow(data.gb, secret.a));
+      cipher2.start();
+      cipher2.update(forge.util.createBuffer(infostring));
+      cipher2.finish();
+      socket.emit('save password', cipher2.output.getBytes(), function() {
         console.log('password saved callback');
       });
       $('.saved-passwords').append('<option value=' + info.id +  '>' + info.id  + '</option>');
