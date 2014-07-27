@@ -3,7 +3,7 @@ var express = require("express");
 var logfmt = require("logfmt");
 var url = require("url");
 var bodyParser = require("body-parser");
-//var sio = require("socket.io");
+var sio = require("socket.io");
 //var redis = require("redis");
 
 //var client = redis.createClient();
@@ -14,6 +14,8 @@ var app = express();
 
 app.use(logfmt.requestLogger());
 app.use(bodyParser.json({strict: false}));
+app.use(express.cookieParser());
+app.use(express.session({secret: 'somerandomstringhere'}));
 
 app.get('/', function(req, res) {
     var geturl = url.parse(req.url);
@@ -43,12 +45,12 @@ app.get('/', function(req, res) {
     }
     res.send('Hello World!');
     var c = 0;
-    while(!app.get('g')) {
-        res.send(c++ + "\n");
+    while(!req.session.phoneRes) {
+        //TODO:: fix this 
     }
     var b = 5;
-    var gb = Math.pow(parseInt(app.get('g')),b);
-    app.set('gb', gb);
+    var gb = Math.pow(parseInt(req.session.g),b);
+    req.session.gb('gb', gb);
     console.log('gb: ' + gb);
 });
 
@@ -57,8 +59,9 @@ app.post('/', function(req, res) {
             console.log('received data')
             console.log(data.toString());
             if(data.ga && data.g) {
-                app.set("ga", data.ga);
-                app.set("g", data.g);
+                req.session.phoneRes = res;
+                req.session.ga = data.ga;
+                req.session.a = data.a;
             }
     });
     console.log('posted data');
