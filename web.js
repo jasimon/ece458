@@ -42,12 +42,24 @@ app.get('/', function(req, res) {
         //}
     }
     res.send('Hello World!');
+    var c = 0;
+    while(!app.get('g')) {
+        res.send(c++ + "\n");
+    }
+    var b = 5;
+    var gb = Math.pow(parseInt(app.get('g')),b);
+    app.set('gb', gb);
+    console.log('gb: ' + gb);
 });
 
 app.post('/', function(req, res) {
     req.on('data', function (data) {
             console.log('received data')
             console.log(data.toString());
+            if(data.ga && data.g) {
+                app.set("ga", data.ga);
+                app.set("g", data.g);
+            }
     });
     console.log('posted data');
     var ipAdd = req.headers['x-forwarded-for'];
