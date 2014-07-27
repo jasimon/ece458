@@ -54,13 +54,24 @@ $(document).ready(function() {
   });
 
   $('.save-pwd').on('click', function() {
+      handshake(savePass);
+  });
+  $('h1').css('color', 'red');
+  function handshake(callback) {
+    var ret =  {};
+    ret.g = 5;
+    ret.ga = 125;
+    socket.emit('handshake', ret, function(x) {
+      return function(data) {
+        console.log('calling back handshake browser');
+        x(data);
+      };
+    }(callback));
+  }
+  function savePass(data) {
+        console.log('handshook');
+        console.log(data);
     console.log('saving password');
-    var cipher = forge.cipher.createCipher('AES-CBC', key);
-    cipher.start({iv: iv});
-    cipher.update(forge.util.createBuffer($('.pwd').val()));
-    cipher.finish();
-    var info = {};
-    info.pwd = cipher.output.getBytes();
     info.id = $('.save-name').val();
     if(info.id && $('.pwd').val()) {
       var cipher = forge.cipher.createCipher('AES-CBC', key);
@@ -79,7 +90,6 @@ $(document).ready(function() {
     } else {
       alert('no name supplied');
     }
-  });
-  $('h1').css('color', 'red');
+  }
 })
 

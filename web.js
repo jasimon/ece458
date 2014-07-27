@@ -44,6 +44,16 @@ io.on('connection', function(socket) {
         io.sockets.socket(client.phone).emit('hey');
     });
 
+    socket.on('handshake', function(data, callback) {
+        io.sockets.socket(client.phone).emit('handshake', data, function(x,d) {
+            return function(gb) {
+                console.log('gb? ' + gb);
+                data.gb = gb;
+                x(d);
+            };
+        }(callback, data))
+    })
+
     socket.on('save password', function(data, callback) {
         console.log('saving password with data: ' + data);
         io.sockets.socket(client.phone).emit('save password', data, function(x) {
