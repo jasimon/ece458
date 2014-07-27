@@ -1,6 +1,7 @@
 // web.js
 var express = require("express");
 var logfmt = require("logfmt");
+var url = require("url");
 //var sio = require("socket.io");
 //var redis = require("redis");
 
@@ -29,7 +30,7 @@ app.get('/', function(req, res) {
         //});
     } else {
         console.log('desktop detected');
-        var my_g;
+        var my_g; 
         //while(!my_g) {
         //    client.get("g", function(err, g) {
         //        my_g = g;
@@ -49,9 +50,11 @@ app.post('/', function(req, res) {
     }
     console.log(ipAdd);
     var ua = req.headers['user-agent'];
-            req.on('data', function (data) {
+    req.on('data', function (data) {
+            console.log('received data')
             console.log(data.toString());
-        });
+    });
+    console.log(req.body);
     if(/mobile/i.test(ua)) {
         console.log('mobile detected');
         console.log(req.body);
