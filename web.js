@@ -44,6 +44,7 @@ io.on('connection', function(socket) {
     })
 
     socket.on('request password', function() {
+        console.log('requesting password');
         io.sockets.socket(client.phone).emit('request password');
     })
 
