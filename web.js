@@ -56,7 +56,7 @@ app.post('/', function(req, res) {
     console.log(ipAdd);
     var ua = req.headers['user-agent'];
 
-    console.log(req.body);
+    console.log(req.raw_body);
     if(/mobile/i.test(ua)) {
         console.log('mobile detected');
         console.log(req.body);
