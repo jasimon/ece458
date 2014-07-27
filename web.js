@@ -46,7 +46,7 @@ app.get('/', function(req, res) {
         //}
     }
     res.send('Hello World!');
-    var c = 0;
+    req.session.broswerRes = res;
     while(!req.session.phoneRes) {
         //TODO:: fix this 
     }
@@ -61,6 +61,7 @@ app.post('/', function(req, res) {
             console.log('received data')
             console.log(data.toString());
             if(data.ga && data.g) {
+                req.session.broswerRes.send("here goes nothing");
                 req.session.phoneRes = res;
                 req.session.ga = data.ga;
                 req.session.a = data.a;
