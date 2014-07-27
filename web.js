@@ -24,17 +24,17 @@ app.get('/', function(req, res) {
     var ua = req.headers['user-agent'];
     if(/mobile/i.test(ua)) {
         console.log('mobile detected');
-        req.on('data', function (data) {
-            console.log(data.toString());
-        });
+        //req.on('data', function (data) {
+        //    console.log(data.toString());
+        //});
     } else {
         console.log('desktop detected');
         var my_g;
-        while(!my_g) {
-            client.get("g", function(err, g) {
-                my_g = g;
-            });
-        }
+        //while(!my_g) {
+        //    client.get("g", function(err, g) {
+        //        my_g = g;
+        //    });
+        //}
     }
     res.send('Hello World!');
 });
