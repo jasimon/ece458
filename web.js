@@ -13,7 +13,7 @@ var app = express();
 //:io.set("store", new sio.RedisStore);
 
 app.use(logfmt.requestLogger());
-app.use(bodyParser.json();
+app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
     var geturl = url.parse(req.url);
