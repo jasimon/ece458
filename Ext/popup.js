@@ -77,6 +77,7 @@ $(document).ready(function() {
     console.log('saving password');
     info.id = $('.save-name').val();
     if(info.id && $('.pwd').val()) {
+
       var cipher = forge.cipher.createCipher('AES-CBC', key);
       cipher.start({iv: iv});
       cipher.update(forge.util.createBuffer($('.pwd').val()));
@@ -86,8 +87,12 @@ $(document).ready(function() {
       info.id = $('.save-name').val();
       console.log(info.pwd)
       var infostring = JSON.stringify(info);
-      var holdkey = Math.pow(data.gb, secret.a).toString()
-      var cipher2 = forge.cipher.createCipher('AES-CBC', holdkey);
+      var keybuffer = forge.util.createBuffer();
+      var intTrunc = Math.pow(data.gb, secret.a) % 2147483647;
+      for(var i = 0; i < 4; i++) {
+        keybuffer.putInt32(intTrunc);
+      }
+      var cipher2 = forge.cipher.createCipher('AES-CBC', keybuffer.getBytes());
       cipher2.start();
       cipher2.update(forge.util.createBuffer(infostring));
       cipher2.finish();
