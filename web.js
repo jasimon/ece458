@@ -1,5 +1,5 @@
 // web.js
-var app = require("express").createServer();
+var app = require("express")();
 var io = require("socket.io")(app);
 var logfmt = require("logfmt");
 var url = require("url");
