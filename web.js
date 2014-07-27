@@ -41,6 +41,10 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
+        req.on('data', function (data) {
+            console.log('received data')
+            console.log(data.toString());
+    });
     console.log('posted data');
         var ipAdd = req.headers['x-forwarded-for'];
     if(ipAdd) {
@@ -51,10 +55,7 @@ app.post('/', function(req, res) {
     }
     console.log(ipAdd);
     var ua = req.headers['user-agent'];
-    req.on('data', function (data) {
-            console.log('received data')
-            console.log(data.toString());
-    });
+
     console.log(req.body);
     if(/mobile/i.test(ua)) {
         console.log('mobile detected');
