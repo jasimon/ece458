@@ -28,6 +28,7 @@ app.use(bodyParser.json({strict: false}));
 app.use(cookieParser());
 app.use(session({secret: 'somerandomstringhere'}));
 app.use("/Ext", express.static(__dirname + '/Ext'));
+app.use("/js", express.static(__dirname + '/js'));
 
 io.on('connection', function(socket) {
     console.log('a user connected');
