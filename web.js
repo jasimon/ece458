@@ -1,16 +1,19 @@
 // web.js
-var express = require("express");
+var app = require("express").createServer();
+var io = require("socket.io")(app);
 var logfmt = require("logfmt");
 var url = require("url");
 var bodyParser = require("body-parser");
-var sio = require("socket.io");
 var cookieParser = require('cookie-parser')
 var session = require('express-session');
 //var redis = require("redis");
 
 //var client = redis.createClient();
-var app = express();
-var io = sio.listen(app);
+
+var port = Number(process.env.PORT || 5000);
+app.listen(port, function() {
+    console.log("Listening on " + port);
+});
 
 //:io.set("store", new sio.RedisStore);
 
@@ -21,7 +24,7 @@ app.use(session({secret: 'somerandomstringhere'}));
 
 io.on('connection'), function(socket) {
     console.log('a user connected');
-}
+});
 
 app.get('/', function(req, res) {
     var geturl = url.parse(req.url);
@@ -100,7 +103,4 @@ app.post('/', function(req, res) {
     res.send('Hello World!');
 });
 
-var port = Number(process.env.PORT || 5000);
-app.listen(port, function() {
-    console.log("Listening on " + port);
-});
+
