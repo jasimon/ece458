@@ -23,12 +23,15 @@
       -
       - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
      -->
-     <!--<script src="http://obscure-scrubland-1696.herokuapp.com/socket.io/socket.io.js"></script> -->
+     <script src="socket.io/socket.io.js"></script>
      <script src="jquery-1.11.1.min.js"></script>
     <script src="popup.js"></script>
+    <script>
+      var socket = io();
+    </script>
   </head>
   <body>
-    <h1>SecurePassasl;ksd;klfa'dskfm passwords</h1>
+    <h1>SecurePass passwords</h1>
     <div>
       <button>generate password</button> <input />
     </div>

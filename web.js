@@ -28,6 +28,10 @@ io.on('connection', function(socket) {
     console.log('a user connected');
 });
 
+app.get('/index.html', function(req, res) {
+    res.sendfile('Ext/index.html');
+})
+
 app.get('/', function(req, res) {
     var geturl = url.parse(req.url);
     console.log(geturl);
