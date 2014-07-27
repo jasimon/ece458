@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.7.0",
-    "logfmt": "^1.1.2"
+    "logfmt": "^1.1.2",
+    "socket.io": "^1.0.6"
   },
   "repository": {
     "type": "git",
