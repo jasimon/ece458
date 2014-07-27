@@ -48,7 +48,8 @@ app.post('/', function(req, res) {
         ipAdd = req.connection.remoteAddress;
     }
     console.log(ipAdd);
-        var ua = req.headers['user-agent'];
+    var ua = req.headers['user-agent'];
+            console.log(req.body);
     if(/mobile/i.test(ua)) {
         console.log('mobile detected');
         console.log(req.body);
