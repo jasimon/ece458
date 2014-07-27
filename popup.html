@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Getting Started Extension's Popup</title>
+    <style>
+      body {
+        min-width: 357px;
+        overflow-x: hidden;
+      }
+
+      img {
+        margin: 5px;
+        border: 2px solid black;
+        vertical-align: middle;
+        width: 75px;
+        height: 75px;
+      }
+    </style>
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
+     -->
+     <script src="http://obscure-scrubland-1696.herokuapp.com/socket.io/socket.io.js"></script>
+     <script src="jquery-1.11.1.min.js"></script>
+    <script src="popup.js"></script>
+  </head>
+  <body>
+    <h1>SecurePass passwords</h1>
+    <div>
+      <button>generate password</button> <input />
+    </div>
+    <div>
+      <button class="bt-discovery">start discovery</button>
+    </div>
+  </body>
+</html>
+
