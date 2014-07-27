@@ -86,7 +86,7 @@ $(document).ready(function() {
       info.id = $('.save-name').val();
       console.log(info.pwd)
       var infostring = JSON.stringify(info);
-      var cipher2 = forge.cipher.createCipher('AES-CBC', Math.pow(data.gb, secret.a));
+      var cipher2 = forge.cipher.createCipher('AES-CBC', Math.pow(data.gb, secret.a).toString());
       cipher2.start();
       cipher2.update(forge.util.createBuffer(infostring));
       cipher2.finish();
