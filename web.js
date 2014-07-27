@@ -34,8 +34,14 @@ io.on('connection', function(socket) {
     socket.on('register browser', function() {
         client.browser = socket.id;
         console.log('registered broswer with id: ' + client.browser);
-        console.log(io.sockets);//.socket(client.browser).emit('sup');
+        io.sockets.socket(client.browser).emit('sup');
     });
+
+    socket.on('register phone', function() {
+        client.phone = socket.id;
+        console.log('registered phone with id: '  + client.phone);
+        io.sockets.socket(client.phone).emit('hey');
+    })
 });
 
 app.get('/index.html', function(req, res) {

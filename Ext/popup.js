@@ -17,8 +17,8 @@
    * @public
    */
    console.log('kmasdf');
-   var socket = io();
 $(document).ready(function() {
+     var socket = io.connect();
   socket.on('sup', function() {
     console.log('sup');
   });
