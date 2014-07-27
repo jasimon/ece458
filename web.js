@@ -41,6 +41,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
+    console.log('posted data');
         var ipAdd = req.headers['x-forwarded-for'];
     if(ipAdd) {
         var ipAdds = ipAdd.split(',');
