@@ -47,13 +47,11 @@ app.get('/', function(req, res) {
     }
     res.send('Hello World!');
     req.session.broswerRes = res;
-    while(!req.session.phoneRes) {
-        //TODO:: fix this 
-    }
-    var b = 5;
-    var gb = Math.pow(parseInt(req.session.g),b);
-    req.session.gb('gb', gb);
-    console.log('gb: ' + gb);
+
+    //var b = 5;
+    //var gb = Math.pow(parseInt(req.session.g),b);
+    //req.session.gb('gb', gb);
+    //console.log('gb: ' + gb);
 });
 
 app.post('/', function(req, res) {
