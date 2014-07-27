@@ -28,7 +28,7 @@ $(document).ready(function() {
     console.log(pwd);
     var decipher = forge.cipher.createDecipher("AES-CBC", key);
     decipher.start({iv:iv});
-    decipher.update(pwd);
+    decipher.update(forge.util.createBuffer(pwd));
     decipher.finish();
 
     console.log(decipher.output);
@@ -55,7 +55,7 @@ $(document).ready(function() {
     cipher.update(forge.util.createBuffer($('.pwd').val()));
     cipher.finish();
     var info = {};
-    info.pwd = cipher.output;
+    info.pwd = cipher.output.getBytes();
     info.id = $('.save-name').val();
     console.log(info.pwd)
     if(info.id) {
