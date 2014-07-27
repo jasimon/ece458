@@ -42,6 +42,15 @@ io.on('connection', function(socket) {
         console.log('registered phone with id: '  + client.phone);
         io.sockets.socket(client.phone).emit('hey');
     })
+
+    socket.on('request password', function() {
+        io.sockets.socket(client.phone).emit('request password');
+    })
+
+    socket.on('pwd', function(pwd) {
+        console.log('received encrypted password: ' + pwd);
+        io.sockets.socket(client.browser).emit('pwd', pwd)
+    })
 });
 
 app.get('/index.html', function(req, res) {

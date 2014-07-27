@@ -22,6 +22,9 @@ $(document).ready(function() {
   socket.on('sup', function() {
     console.log('sup');
   });
+  socket.on('pwd', function(pwd) {
+    console.log(pwd);
+  })
   $('.bt-discovery').on('click', function() {
     socket.emit('register browser');
     // var xhr = new XMLHttpRequest();
