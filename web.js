@@ -26,7 +26,7 @@ app.get('/', function(req, res) {
         console.log('mobile detected');
         req.on('data', function (data) {
             console.log(data.toString());
-        }
+        });
     } else {
         console.log('desktop detected');
         var my_g
