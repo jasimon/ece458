@@ -35,7 +35,10 @@ $(document).ready(function() {
     //   }
     // };
     // xhr.send();
-  })
+  });
+  $('pwd-request').on('click') {
+    socket.emit('request password');
+  }
 
   $('h1').css('color', 'red');
 })

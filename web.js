@@ -49,7 +49,7 @@ io.on('connection', function(socket) {
 
     socket.on('pwd', function(pwd) {
         console.log('received encrypted password: ' + pwd);
-        io.sockets.socket(client.browser).emit('pwd', pwd)
+        io.sockets.socket(client.browser).emit('pwd', pwd);
     })
 });
 
