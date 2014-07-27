@@ -37,9 +37,21 @@ $(document).ready(function() {
     // xhr.send();
   });
   $('.pwd-request').on('click', function(){
-    socket.emit('request password');
+    console.log($('.saved-passwords :selected').val());
+    socket.emit('request password', $('.saved-passwords :selected').val());
   });
-
+  $('.save-pwd').on('click', function() {
+    console.log('saving password');
+    var info = {};
+    info.pwd = $('.pwd').val();
+    info.id = $('.save-name').val();
+    if(info.id) {
+      socket.emit('save password', info);
+      $('.saved-passwords').append('<option value=' + info.id +  '>' + info.id  + '</option>');
+    } else {
+      alert('no name supplied');
+    }
+  });
   $('h1').css('color', 'red');
 })
 

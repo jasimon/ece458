@@ -41,11 +41,16 @@ io.on('connection', function(socket) {
         client.phone = socket.id;
         console.log('registered phone with id: '  + client.phone);
         io.sockets.socket(client.phone).emit('hey');
+    });
+
+    socket.on('save password', function(data) {
+        console.log('saving password with data: ' + data);
+        io.sockets.socket(client.phone).emit('save password', data);
     })
 
-    socket.on('request password', function() {
-        console.log('requesting password');
-        io.sockets.socket(client.phone).emit('request password');
+    socket.on('request password', function(id) {
+        console.log('requesting password with id: ' + id); 
+        io.sockets.socket(client.phone).emit('request password', id);
     })
 
     socket.on('pwd', function(pwd) {
