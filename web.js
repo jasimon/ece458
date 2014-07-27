@@ -45,7 +45,7 @@ app.get('/', function(req, res) {
         //    });
         //}
     }
-    res.send('Hello World!');
+    res.write('Hello World!');
     req.session.broswerRes = res;
 
     //var b = 5;
