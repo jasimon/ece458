@@ -12,6 +12,7 @@ var app = express();
 //:io.set("store", new sio.RedisStore);
 
 app.use(logfmt.requestLogger());
+app.use(express.bodyParser());
 
 app.get('/', function(req, res) {
     var geturl = url.parse(req.url);
@@ -43,7 +44,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-        req.on('data', function (data) {
+    req.on('data', function (data) {
             console.log('received data')
             console.log(data.toString());
     });
