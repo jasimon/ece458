@@ -2,9 +2,9 @@
 var express = require("express");
 var logfmt = require("logfmt");
 //var sio = require("socket.io");
-var redis = require("redis");
+//var redis = require("redis");
 
-var client = redis.createClient();
+//var client = redis.createClient();
 var app = express();
 //var io = sio.listen(app);
 
