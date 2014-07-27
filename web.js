@@ -13,7 +13,7 @@ var app = express();
 //:io.set("store", new sio.RedisStore);
 
 app.use(logfmt.requestLogger());
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
     var geturl = url.parse(req.url);
@@ -60,7 +60,7 @@ app.post('/', function(req, res) {
     console.log(ipAdd);
     var ua = req.headers['user-agent'];
 
-    console.log(req);
+    console.log(req.headers);
     if(/mobile/i.test(ua)) {
         console.log('mobile detected');
         console.log(req.body);
