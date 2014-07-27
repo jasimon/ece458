@@ -71,6 +71,7 @@ $(document).ready(function() {
   function savePass(data) {
         console.log('handshook');
         console.log(data);
+        var info = {};
     console.log('saving password');
     info.id = $('.save-name').val();
     if(info.id && $('.pwd').val()) {
