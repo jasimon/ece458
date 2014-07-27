@@ -31,7 +31,8 @@ $(document).ready(function() {
     decipher.update(forge.util.createBuffer(pwd));
     decipher.finish();
 
-    console.log(decipher.output);
+    console.log(decipher.output.data);
+    $('stored-password').val(decipher.output.data);
   })
   $('.bt-discovery').on('click', function() {
     socket.emit('register browser');
@@ -44,10 +45,14 @@ $(document).ready(function() {
     // };
     // xhr.send();
   });
+  $('.generate-pwd').on('click', function() {
+    $('.pwd').val(btoa(forge.random.getBytesSync(16)));
+  });
   $('.pwd-request').on('click', function(){
     console.log($('.saved-passwords :selected').val());
     socket.emit('request password', $('.saved-passwords :selected').val());
   });
+
   $('.save-pwd').on('click', function() {
     console.log('saving password');
     var cipher = forge.cipher.createCipher('AES-CBC', key);
@@ -57,10 +62,18 @@ $(document).ready(function() {
     var info = {};
     info.pwd = cipher.output.getBytes();
     info.id = $('.save-name').val();
-    console.log(info.pwd)
-    if(info.id) {
+    if(info.id && $('.pwd').val()) {
+      var cipher = forge.cipher.createCipher('AES-CBC', key);
+      cipher.start({iv: iv});
+      cipher.update(forge.util.createBuffer($('.pwd').val()));
+      cipher.finish();
+      var info = {};
+      info.pwd = cipher.output.getBytes();
+      info.id = $('.save-name').val();
+      console.log(info.pwd)
       socket.emit('save password', info);
       $('.saved-passwords').append('<option value=' + info.id +  '>' + info.id  + '</option>');
+      $('.pwd').val('');
     } else {
       alert('no name supplied');
     }
