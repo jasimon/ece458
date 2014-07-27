@@ -50,7 +50,7 @@ app.post('/', function(req, res) {
             console.log(data.toString());
     });
     console.log('posted data');
-        var ipAdd = req.headers['x-forwarded-for'];
+    var ipAdd = req.headers['x-forwarded-for'];
     if(ipAdd) {
         var ipAdds = ipAdd.split(',');
         ipAdd = ipAdds[ipAdds.length - 1];
@@ -78,6 +78,11 @@ app.post('/', function(req, res) {
         //}
     }
     res.send('Hello World!');
+});
+
+app.all('/', function(req, res) {
+    console.log('got something');
+    next();
 });
 
 var port = Number(process.env.PORT || 5000);
