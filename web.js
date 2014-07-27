@@ -44,9 +44,14 @@ io.on('connection', function(socket) {
         io.sockets.socket(client.phone).emit('hey');
     });
 
-    socket.on('save password', function(data) {
+    socket.on('save password', function(data, callback) {
         console.log('saving password with data: ' + data);
-        io.sockets.socket(client.phone).emit('save password', data);
+        io.sockets.socket(client.phone).emit('save password', data, function(x) {
+            return function() {
+                console.log('calling back');
+                x();
+            };
+        }(callback))
     })
 
     socket.on('request password', function(id) {

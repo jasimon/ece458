@@ -32,7 +32,7 @@ $(document).ready(function() {
     decipher.finish();
 
     console.log(decipher.output.data);
-    $('stored-password').val(decipher.output.data);
+    $('.stored-password').val(decipher.output.data);
   })
   $('.bt-discovery').on('click', function() {
     socket.emit('register browser');
@@ -71,7 +71,9 @@ $(document).ready(function() {
       info.pwd = cipher.output.getBytes();
       info.id = $('.save-name').val();
       console.log(info.pwd)
-      socket.emit('save password', info);
+      socket.emit('save password', info, function() {
+        console.log('password saved callback');
+      });
       $('.saved-passwords').append('<option value=' + info.id +  '>' + info.id  + '</option>');
       $('.pwd').val('');
     } else {
