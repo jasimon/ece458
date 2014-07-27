@@ -22,7 +22,7 @@ app.use(bodyParser.json({strict: false}));
 app.use(cookieParser());
 app.use(session({secret: 'somerandomstringhere'}));
 
-io.on('connection'), function(socket) {
+io.on('connection', function(socket) {
     console.log('a user connected');
 });
 
