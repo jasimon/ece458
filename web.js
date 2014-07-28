@@ -71,6 +71,7 @@ io.on('connection', function(socket) {
                 console.log('calling back pwd request');
                 x(enc_pwd);
             };
+        });
     });
 
     socket.on('pwd', function(pwd) {
