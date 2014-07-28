@@ -88,14 +88,14 @@ $(document).ready(function() {
       console.log(info.pwd)
       var infostring = JSON.stringify(info);
       var keybuffer = forge.util.createBuffer();
+      var ivbuffer  = forge.util.createBuffer();
       var intTrunc = Math.pow(data.gb, secret.a) % 2147483647;
       for(var i = 0; i < 4; i++) {
         keybuffer.putInt32(intTrunc);
+        ivbuffer.putInt32(intTrunc);
       }
-      console.log(keybuffer.getBytes());
-      console.log(keybuffer.getBytes());
       var cipher2 = forge.cipher.createCipher('AES-CBC', keybuffer.getBytes());
-      cipher2.start({iv: keybuffer.getBytes()});
+      cipher2.start({iv: ivbuffer.getBytes()});
       cipher2.update(forge.util.createBuffer(infostring));
       cipher2.finish();
       socket.emit('save password', cipher2.output.getBytes(), function() {
