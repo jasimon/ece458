@@ -84,7 +84,7 @@ $(document).ready(function() {
 
     var decipher2 = forge.cipher.createDecipher('AES-CBC', key);
     decipher2.start({iv:iv});
-    decipher2.update(cipher.output);
+    decipher2.update(decipher.output);
     decipher2.finish();
 
     console.log('cipher 2');
