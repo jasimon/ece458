@@ -76,7 +76,7 @@ $(document).ready(function() {
     }
     var decipher = forge.cipher.createDecipher('AES-CBC', keybuffer.bytes());
     decipher.start({iv:ivbuffer.bytes()});
-    deciper.update(forge.util.createBuffer(data));
+    decipher.update(forge.util.createBuffer(data));
     decipher.finish();
 
     console.log('cipher1')
