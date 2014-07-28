@@ -46,7 +46,8 @@ $(document).ready(function() {
     // xhr.send();
   });
   $('.generate-pwd').on('click', function() {
-    $('.pwd').val("something");//btoa(forge.random.getBytesSync(16)));
+    var randpass = generatePass(20);
+    $('.pwd').val(randpass);//btoa(forge.random.getBytesSync(16)));
   });
   $('.pwd-request').on('click', function(){
     handshake(reqPass);
@@ -146,6 +147,14 @@ $(document).ready(function() {
     } else {
       alert('no name supplied');
     }
+  }
+  function generatePass(len) {
+    var ret = '';
+    var chars = 'abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    for(var i = 0, clen = chars.length; i < len; i++) {
+      ret += chars.charAt(Math.floor(Math.random() * clen));
+    }
+    return ret;
   }
 })
 
