@@ -46,7 +46,7 @@ $(document).ready(function() {
     // xhr.send();
   });
   $('.generate-pwd').on('click', function() {
-    $('.pwd').val(btoa(forge.random.getBytesSync(16)));
+    $('.pwd').val("something");//btoa(forge.random.getBytesSync(16)));
   });
   $('.pwd-request').on('click', function(){
     handshake(reqPass);
@@ -74,21 +74,21 @@ $(document).ready(function() {
       keybuffer.putInt32(intTrunc);
       ivbuffer.putInt32(intTrunc);
     }
-    var cipher = forge.cipher.createDecipher('AES-CBC', keybuffer.bytes());
-    cipher.start({iv:ivbuffer.bytes()});
-    cipher.update(forge.util.createBuffer(data));
-    cipher.finish();
+    var decipher = forge.cipher.createDecipher('AES-CBC', keybuffer.bytes());
+    decipher.start({iv:ivbuffer.bytes()});
+    deciper.update(forge.util.createBuffer(data));
+    decipher.finish();
 
     console.log('cipher1')
-    console.log(cipher.output.bytes());
+    console.log(decipher.output.bytes());
 
-    var cipher2 = forge.cipher.createDecipher('AES-CBC', key);
-    cipher2.start({iv:iv});
-    cipher2.update(cipher.output);
-    cipher2.finish();
+    var decipher2 = forge.cipher.createDecipher('AES-CBC', key);
+    decipher2.start({iv:iv});
+    decipher2.update(cipher.output);
+    decipher2.finish();
 
     console.log('cipher 2');
-    console.log(cipher2.output.bytes());
+    console.log(decipher2.output.bytes());
 
   }
 
