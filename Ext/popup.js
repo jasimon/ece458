@@ -80,7 +80,7 @@ $(document).ready(function() {
     cipher.finish();
 
     console.log('cipher1')
-    console.log(cipher.output,bytes());
+    console.log(cipher.output.bytes());
 
     var cipher2 = forge.cipher.createDecipher('AES-CBC', key);
     cipher2.start({iv:iv});
