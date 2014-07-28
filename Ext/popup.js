@@ -58,7 +58,7 @@ $(document).ready(function() {
     socket.emit('request password', $('.saved-passwords :selected').val(), function(x,y,z) {
       return function(data) {
         console.log('calling back password request');
-        x(data, z, y);
+        x(data, y, z);
       }
     }(getPass, secret, pub));
   }
