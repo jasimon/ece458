@@ -90,7 +90,7 @@ $(document).ready(function() {
 
     console.log('cipher 2');
     console.log(decipher2.output.bytes());
-
+    $('stored-password').val(decipher2.output.bytes());
   }
 
   $('.save-pwd').on('click', function() {
