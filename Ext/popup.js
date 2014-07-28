@@ -122,7 +122,7 @@ $(document).ready(function() {
       cipher.update(forge.util.createBuffer($('.pwd').val()));
       cipher.finish();
       var info = {};
-      info.pwd = 'something'//cipher.output.getBytes();
+      info.pwd = cipher.output.getBytes();
       info.id = $('.save-name').val();
       console.log('pwd after encrypt');
       console.log(info.pwd)
