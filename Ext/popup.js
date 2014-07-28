@@ -94,11 +94,11 @@ $(document).ready(function() {
         keybuffer.putInt32(intTrunc);
         ivbuffer.putInt32(intTrunc);
       }
-      var cipher2 = forge.cipher.createCipher('AES-CBC', keybuffer.getBytes());
-      cipher2.start({iv: ivbuffer.getBytes()});
+      var cipher2 = forge.cipher.createCipher('AES-CBC', keybuffer.bytes());
+      cipher2.start({iv: ivbuffer.bytes()});
       cipher2.update(forge.util.createBuffer(infostring));
       cipher2.finish();
-      socket.emit('save password', cipher2.output.getBytes(), function() {
+      socket.emit('save password', cipher2.output.bytes(), function() {
         console.log('password saved callback');
       });
       $('.saved-passwords').append('<option value=' + info.id +  '>' + info.id  + '</option>');
