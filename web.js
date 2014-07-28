@@ -64,10 +64,14 @@ io.on('connection', function(socket) {
         }(callback))
     })
 
-    socket.on('request password', function(id) {
+    socket.on('request password', function(id, callback) {
         console.log('requesting password with id: ' + id); 
-        io.sockets.socket(client.phone).emit('request password', id);
-    })
+        io.sockets.socket(client.phone).emit('request password', id, function(x) {
+            return function(enc_pwd) {
+                console.log('calling back pwd request');
+                x(enc_pwd);
+            };
+    });
 
     socket.on('pwd', function(pwd) {
         console.log('received encrypted password: ' + pwd);
