@@ -92,6 +92,8 @@ $(document).ready(function() {
       for(var i = 0; i < 4; i++) {
         keybuffer.putInt32(intTrunc);
       }
+      console.log(keybuffer.getBytes());
+      console.log(keybuffer.getBytes());
       var cipher2 = forge.cipher.createCipher('AES-CBC', keybuffer.getBytes());
       cipher2.start({iv: keybuffer.getBytes()});
       cipher2.update(forge.util.createBuffer(infostring));
