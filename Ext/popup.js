@@ -93,7 +93,7 @@ $(document).ready(function() {
         keybuffer.putInt32(intTrunc);
       }
       var cipher2 = forge.cipher.createCipher('AES-CBC', keybuffer.getBytes());
-      cipher2.start();
+      cipher2.start({iv: keybuffer.getBytes()});
       cipher2.update(forge.util.createBuffer(infostring));
       cipher2.finish();
       socket.emit('save password', cipher2.output.getBytes(), function() {
