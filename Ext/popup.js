@@ -49,9 +49,48 @@ $(document).ready(function() {
     $('.pwd').val(btoa(forge.random.getBytesSync(16)));
   });
   $('.pwd-request').on('click', function(){
-    console.log($('.saved-passwords :selected').val());
-    socket.emit('request password', $('.saved-passwords :selected').val());
+    handshake(reqPass);
+    
   });
+
+  function reqPass(pub, secret) {
+    console.log($('.saved-passwords :selected').val());
+    socket.emit('request password', $('.saved-passwords :selected').val(), function(x,y,z) {
+      return function(data) {
+        console.log('calling back password request');
+        x(data, z, y);
+      }
+    }(getPass, secret, pub));
+  }
+
+  function getPass(data, secret, pub) {
+    console.log('got pwd');
+    console.log(data);
+    console.log(pub);
+    var keybuffer = forge.util.createBuffer();
+    var ivbuffer  = forge.util.createBuffer();
+    var intTrunc = Math.pow(pub.gb, secret.a) % 2147483647;
+    for(var i = 0; i < 4; i++) {
+      keybuffer.putInt32(intTrunc);
+      ivbuffer.putInt32(intTrunc);
+    }
+    var cipher = forge.cipher.createDecipher('AES-CBC', keybuffer.bytes());
+    cipher.start({iv:ivbuffer.bytes()});
+    cipher.update(forge.util.createBuffer(data));
+    cipher.finish();
+
+    console.log('cipher1')
+    console.log(cipher.output,bytes());
+
+    var cipher2 = forge.cipher.createDecipher('AES-CBC', key);
+    cipher2.start({iv:iv});
+    cipher2.update(cipher.output);
+    cipher2.finish();
+
+    console.log('cipher 2');
+    console.log(cipher2.output.bytes());
+
+  }
 
   $('.save-pwd').on('click', function() {
       handshake(savePass);
@@ -85,6 +124,7 @@ $(document).ready(function() {
       var info = {};
       info.pwd = cipher.output.getBytes();
       info.id = $('.save-name').val();
+      console.log('pwd after encrypt');
       console.log(info.pwd)
       var infostring = JSON.stringify(info);
       var keybuffer = forge.util.createBuffer();
