@@ -21,6 +21,7 @@ $(document).ready(function() {
      var socket = io.connect();
      var key = forge.random.getBytesSync(32);
      var iv = forge.random.getBytesSync(32);
+     var p = 2147483629;
   socket.on('sup', function() {
     console.log('sup');
   });
@@ -70,7 +71,7 @@ $(document).ready(function() {
     console.log(pub);
     var keybuffer = forge.util.createBuffer();
     var ivbuffer  = forge.util.createBuffer();
-    var intTrunc = Math.pow(pub.gb, secret.a) % 2147483647;
+    var intTrunc = Math.pow(pub.gb, secret.a) % p;
     for(var i = 0; i < 4; i++) {
       keybuffer.putInt32(intTrunc);
       ivbuffer.putInt32(intTrunc);
@@ -99,10 +100,11 @@ $(document).ready(function() {
   $('h1').css('color', 'red');
   function handshake(callback) {
     var secret = {};
-    secret.a = 3;
+    secret.a = Math.floor(Math.random() * 9) + 2;
     var ret =  {};
-    ret.g = 5;
-    ret.ga = Math.pow(ret.g, secret.a);
+    ret.g = Math.floor(Math.random() * 9) + 2;
+    ret.p = p;
+    ret.ga = Math.pow(ret.g, secret.a) % ret.p;
     socket.emit('handshake', ret, function(x,y) {
       return function(data) {
         console.log('calling back handshake browser');
@@ -130,7 +132,7 @@ $(document).ready(function() {
       var infostring = JSON.stringify(info);
       var keybuffer = forge.util.createBuffer();
       var ivbuffer  = forge.util.createBuffer();
-      var intTrunc = Math.pow(data.gb, secret.a) % 2147483647;
+      var intTrunc = Math.pow(data.gb, secret.a) % p;
       for(var i = 0; i < 4; i++) {
         keybuffer.putInt32(intTrunc);
         ivbuffer.putInt32(intTrunc);
