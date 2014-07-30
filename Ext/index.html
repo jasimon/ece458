@@ -1,11 +1,12 @@
 <!doctype html>
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
+    <title>SecurePass</title>
     <style>
       body {
         min-width: 357px;
         overflow-x: hidden;
+        padding:15px;
       }
 
       img {
@@ -15,6 +16,20 @@
         width: 75px;
         height: 75px;
       }
+
+      div {
+        margin:10px;
+      }
+
+      select.form-control, input.form-control{
+        width:250px;
+        display:inline-block;
+      }
+
+      input.form-control[readonly] {
+        cursor: auto;
+      }
+
     </style>
 
     <!--
@@ -27,26 +42,29 @@
      <script src="Ext/jquery-1.11.1.min.js"></script>
     <script src="Ext/popup.js"></script>
     <script src="Ext/forge.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
   <script>
     </script>
   </head>
   <body>
-    <h1>SecurePass passwosrds</h1>
+    <h1>SecurePass Passwords</h1>
  
     <div>
-      <button class="bt-discovery">register browser</button>
+      <button class="bt-discovery btn btn-primary">register browser</button>
     </div>
     <div>
-      <button class='pwd-request'>request password</button> 
-      <select class="saved-passwords"></select>
-      <input class="stored-password" readonly="true"/>
+      <button class='pwd-request btn btn-primary'>request password</button> 
+      <select class="saved-passwords form-control"></select>
+      <input class="stored-password form-control" readonly="true"/>
     </div>
     <div class="a">
-      <button class='save-pwd'>save password</button> 
-      <button class='generate-pwd'>generate password</button>
-      <input class="pwd" readonly="true" /> 
+      <button class='save-pwd btn btn-primary'>save password</button> 
+      <button class='generate-pwd btn btn-primary'>generate password</button>
+      <input class="pwd form-control" readonly="true" /> 
       <span>for</span> 
-      <input class='save-name'/>
+      <input class='save-name form-control'/>
 
     </div>
 

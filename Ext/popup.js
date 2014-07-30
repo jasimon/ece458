@@ -16,7 +16,6 @@
    *
    * @public
    */
-   console.log('kmasdf');
 $(document).ready(function() {
      var socket = io.connect();
      var key = forge.random.getBytesSync(32);
@@ -97,7 +96,6 @@ $(document).ready(function() {
   $('.save-pwd').on('click', function() {
       handshake(savePass);
   });
-  $('h1').css('color', 'red');
   function handshake(callback) {
     var secret = {};
     secret.a = Math.floor(Math.random() * 9) + 2;
